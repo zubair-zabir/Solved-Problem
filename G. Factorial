@@ -1,0 +1,19 @@
+/*https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/G*/
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int i, input;
+    cin >> input;
+    for(i = 1; i <= input; i++)
+    {
+        long long int j, k, fact;
+        cin >> j;
+        for(k = 1, fact = 1; k <= j; k++)
+        {
+            fact = fact * k;
+        }
+        cout << fact << endl;
+ 
+    }
+}
