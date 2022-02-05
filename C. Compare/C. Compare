@@ -1,0 +1,13 @@
+/*https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/C*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string x, y;
+    getline(cin, x);
+    getline(cin, y);
+    if(x < y)
+        cout << x;
+    else
+        cout << y;
+}
