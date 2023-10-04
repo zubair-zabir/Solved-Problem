@@ -2,7 +2,7 @@ import math
 import random
 
 
-#########################################
+
 
 # Function Confirms that the input is a positive integer
 
@@ -139,7 +139,7 @@ def tars(student_type):
         sys.exit()
 
 
-student = input("Are you in CLA, commuter, or Holt? \n")
+student = input("If you are student in CLA type CLA, in Crummer type Crummer, in Holt type Holt, or commuter type commuter \n")
 tars(student)
 
 
@@ -175,15 +175,15 @@ if credit_hrs_int >= 120:
         exit()
 
     else:
-        credit_hrs_rank_int = 5
+        credit_hrs_rank_int = 1
 if credit_hrs_int >= 90:
-    credit_hrs_rank_int = 4
+    credit_hrs_rank_int = 2
 elif credit_hrs_int >= 60:
     credit_hrs_rank_int = 3
 elif credit_hrs_int >= 30:
-    credit_hrs_rank_int = 1
+    credit_hrs_rank_int = 4
 else:
-    credit_hrs_rank_int = 0
+    credit_hrs_rank_int = 5
 total = 0
 total = total + credit_hrs_rank_int
 print('Your total points are:', total, '\n')
@@ -191,13 +191,13 @@ print('Your total points are:', total, '\n')
 
 def calculate_points(major):
     if major == "double major":
-        return 4
+        return 2
     elif major == "triple major":
-        return 5
+        return 3
     elif major == "3-2 program":
-        return 6
+        return 3
     else:
-        return 0  # Default points for other cases
+        return 1  # Default points for other cases
 
 student_major = input("What is your major scenario (double major, triple major, 3-2 program, or other)? \n")
 total += calculate_points(student_major)
@@ -212,21 +212,21 @@ def valid_class_standing(num_range):
 
 
 class_standing_int, class_standing_str = confirm_digit(
-    'What is your class standing? Put 1 for Freshman, 2 for Sophomore, 3 for Junior, 4 for Senior: \n',
+    'What is your class standing? Put 1 for Senior, 2 for Junior , 3 for Sophomore, 4 for Freshman: \n',
     valid_class_standing,
     'Please enter a numerical integer between and including 1 to 4: \n', int)
-# class_standing_str = input('What is your class standing? Put 1 for Freshman, 2 for Sophomore, 3 for Junior, 4 for Senior: ')
+# class_standing_str = input('What is your class standing? Put 1 for Freshman, 2 for Junior, 3 for Sophomore, 4 for Senior: ')
 # class_standing_int = int(class_standing_str)
 
 
 if class_standing_str == '1':
-    print('Your class standing is Freshman. \n')
-elif class_standing_str == '2':
-    print('Your class standing is Sophomore. \n')
-elif class_standing_str == '3':
-    print('Your class standing is Junior. \n')
-else:
     print('Your class standing is Senior. \n')
+elif class_standing_str == '2':
+    print('Your class standing is Junior. \n')
+elif class_standing_str == '3':
+    print('Your class standing is Sophomore. \n')
+else:
+    print('Your class standing is Freshman. \n')
 
 total = total + class_standing_int
 print('Your total points are:', total, '\n')
@@ -246,24 +246,6 @@ print('Your total points are:', total, '\n')
 
 
 ###end gpa question
-
-
-def calculate_eligibility_points(parking_request, esa_request):
-
-    if parking_request:
-        return 2
-
-    if esa_request:
-        return 3
-
-# Input from the user
-parking_request = input("Do you want on-campus parking? (y/n): ").lower() == "y"
-esa_request = input("Do you want to bring an Emotional Support Animal (ESA)? (y/n): ").lower() == "y"
-
-# Calculate eligibility points
-total += calculate_eligibility_points(parking_request, esa_request)
-
-print(f"Your total points are: {total} ")
 
 
 
@@ -291,7 +273,7 @@ if ra_q == 'y':
 
 age_q = input('Are you 23 or older, y or n: \n')
 if age_q == 'y':
-    total = total + 1
+    total = total - 5
 
 athl_q = input('Are you an Athlete, y or n: \n')
 if athl_q == 'y':
