@@ -117,38 +117,29 @@ def test_reason(reason):
 
 
 def validate_address(address):
-    # Split address into components
-    components = address.split()
-
-    # Check and validate street number
-    street_num = components[0]
-    if not street_num.isdigit() or int(street_num) <= 0:
+    # Search for a number at the start, which will be the street number
+    street_number_match = re.search(r'^\d+', address)
+    if not street_number_match:
         return "Invalid street number."
 
-    # Check for box number if present and validate
-    box_num_pattern = re.compile(r'box (\d+)', re.IGNORECASE)
-    box_match = box_num_pattern.search(address)
+    street_number = int(street_number_match.group())
+    remaining_address = address[street_number_match.end():].strip()
+
+    # Search for a box number
+    box_match = re.search(r'box (\d+)', remaining_address, re.IGNORECASE)
+    box_number = None
     if box_match:
-        box_num = box_match.group(1)
-        if not box_num.isdigit():
-            return "Invalid box number."
-    else:
-        box_num = None
+        box_number = int(box_match.group(1))
+        remaining_address = (remaining_address[:box_match.start()] + remaining_address[box_match.end():]).strip()
 
-    # Get street name
-    if box_num:
-        street_name = address.split(box_num_pattern.pattern)[0].split(street_num, 1)[1].strip()
-    else:
-        street_name = address.split(street_num, 1)[1].strip()
-
-    # Check if street name exists and is not just numeric
-    if not street_name or street_name.isdigit():
+    # The remaining part is the street name
+    if not remaining_address:
         return "Invalid street name."
 
     return {
-        'Street Number': int(street_num),
-        'Street Name': street_name,
-        'Box Number': int(box_num) if box_num else None
+        'Street Number': street_number,
+        'Street Name': remaining_address,
+        'Box Number': box_number
     }
 
 
@@ -286,16 +277,6 @@ def form():
         guests.append(get_visitor_details())
         another_visitor = input("\nDo you have another visitor? (yes/no): ").lower().strip()
 
-    # Display collected data
-    # ... [Other details displayed unchanged]
-
-    # Display visitor details if any
-    if guests:
-        print("\nVisitor(s) Details:")
-        for i, visitor in enumerate(guests, 1):
-            print(f"\nVisitor {i}:")
-            for key, value in visitor.items():
-                print(f"{key}: {value}")
 
     # Display collected data
     print("\nCollected Data:")
@@ -304,11 +285,18 @@ def form():
     for key, value in address_data.items():
         print(f"{key}: {value}")
     print(f"Age: {age}")
-    print(f"Gender: {gender}")
-    print(f"State: {state}")
+    print(f"Gender: {gender.title()}")
+    print(f"State: {state.upper()}")
     print(f"Email: {email}")
     print(f"Phone: {phone}")
     print(f"Reason for Visit: {result}")
+
+    if guests:
+        print("\nVisitor(s) Details:")
+        for i, visitor in enumerate(guests, 1):
+            print(f"\nVisitor {i}:")
+            for key, value in visitor.items():
+                print(f"{key}: {value}")
 
 
 # Call the form function to start the process
