@@ -176,12 +176,20 @@ def get_visitor_details():
     address_data = validate_address(v_address)
 
     # While the result is not a dictionary (i.e., it's an error string)
-    while isinstance(address_data, str):
+    while not isinstance(address_data, str):
         print(address_data)  # print the error message
         v_address = input("Invalid input. Please enter visitor's address again: ")
         address_data = validate_address(v_address)
-
     visitor['Address'] = address_data  # Now, address_data is a dictionary
+
+    v_email = input("Enter visitor's email: ")
+    email_info = validate_email(v_email)
+    
+    while not isinstance(email_info, str):
+        print(email_info)  # print the error message
+        v_email = input("Invalid input. Please enter visitor's address again: ")
+        email_info = validate_email(v_email)
+    visitor['Email'] = email_info
 
     # Collect visitor's gender
     v_gender = input("Enter visitor's gender (Male/Female/Other or M/F/O): ")
