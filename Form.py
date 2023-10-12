@@ -252,17 +252,16 @@ def form():
         phone = input("Invalid input. Please enter phone number again: ")
 
     # Collect reason for visit
-        # Collect reason for visit
-        reason_prompt = "Reason for visit (Visit, Interview, Alumni, Tour, Lecture, Other): "
+    reason_prompt = "Reason for visit (Visit, Interview, Alumni, Tour, Lecture, Other): "
+    reason = input(reason_prompt)
+    result = test_reason(reason)
+
+    while result is None:
+        print(f"Invalid input. '{reason}' is not a recognized reason.")
         reason = input(reason_prompt)
         result = test_reason(reason)
 
-        while result is None:
-            print(f"Invalid input. '{reason}' is not a recognized reason.")
-            reason = input(reason_prompt)
-            result = test_reason(reason)
 
-        print(f"Reason for Visit: {result}")
 
     guests = []  # List to store guest details
     alone_response = input("\nAre you coming to the campus alone? (yes/no): ").lower().strip()
@@ -299,7 +298,7 @@ def form():
     print(f"State: {state}")
     print(f"Email: {email}")
     print(f"Phone: {phone}")
-    print(f"Reason for Visit: {reason}")
+    print(f"Reason for Visit: {result}")
 
 
 # Call the form function to start the process
