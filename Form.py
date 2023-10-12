@@ -58,9 +58,9 @@ def test_gender(gender):
 
     if gender_lower in standard_genders:
         # Convert short forms to full forms for uniformity
-        if gender_lower == 'm':
+        if gender_lower == 'm' or gender_lower == "male":
             return 'Male'
-        elif gender_lower == 'f':
+        elif gender_lower == 'f' or gender_lower == "female":
             return 'Female'
         elif gender_lower in ['o', 'others']:
             specify = input("Would you like to specify? (yes/no): ").lower().strip()
@@ -176,19 +176,21 @@ def get_visitor_details():
     address_data = validate_address(v_address)
 
     # While the result is not a dictionary (i.e., it's an error string)
-    while not isinstance(address_data, str):
+    while not isinstance(address_data, dict):
         print(address_data)  # print the error message
         v_address = input("Invalid input. Please enter visitor's address again: ")
         address_data = validate_address(v_address)
     visitor['Address'] = address_data  # Now, address_data is a dictionary
 
     v_email = input("Enter visitor's email: ")
-    email_info = validate_email(v_email)
-    
-    while not isinstance(email_info, str):
+    is_valid, email_info = validate_email(v_email)
+
+    # Check if the email is not valid
+    while not is_valid:
         print(email_info)  # print the error message
-        v_email = input("Invalid input. Please enter visitor's address again: ")
-        email_info = validate_email(v_email)
+        v_email = input("Invalid input. Please enter visitor's email again: ")
+        is_valid, email_info = validate_email(v_email)
+
     visitor['Email'] = email_info
 
     # Collect visitor's gender
