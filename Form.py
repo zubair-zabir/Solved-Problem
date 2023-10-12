@@ -270,6 +270,19 @@ def form():
     # If the primary user is not alone, get details of the first visitor
     if alone_response == 'no':
         guests.append(get_visitor_details())
+    elif alone_response == "yes":
+        print("\nCollected Data:")
+        print(f"Name: {name.title()}")
+        print("Address:")
+        for key, value in address_data.items():
+            print(f"{key}: {value}")
+        print(f"Age: {age}")
+        print(f"Gender: {gender}")
+        print(f"State: {state.upper()}")
+        print(f"Email: {email}")
+        print(f"Phone: {phone}")
+        print(f"Reason for Visit: {result}")
+        return
 
     # Ask if there are more visitors and get their details
     another_visitor = input("\nDo you have another visitor? (yes/no): ").lower().strip()
@@ -280,12 +293,12 @@ def form():
 
     # Display collected data
     print("\nCollected Data:")
-    print(f"Name: {name}")
+    print(f"Name: {name.title()}")
     print("Address:")
     for key, value in address_data.items():
         print(f"{key}: {value}")
     print(f"Age: {age}")
-    print(f"Gender: {gender.title()}")
+    print(f"Gender: {gender()}")
     print(f"State: {state.upper()}")
     print(f"Email: {email}")
     print(f"Phone: {phone}")
