@@ -1,5 +1,23 @@
 movies = []
 
+import json
+
+movies = []
+
+def load_movies():
+    try:
+        with open('movies.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        print("Error reading the movies file. Data may be corrupted.")
+        return []
+
+def save_movies():
+    with open('movies.json', 'w') as file:
+        json.dump(movies, file)
+
 def add_movie():
     title = input("Enter the movie title: ")
     director = input("Enter the movie director: ")
@@ -52,6 +70,8 @@ def find_movie():
 
 
 def menu():
+    global movies
+    movies = load_movies()
     selection = input("\nEnter 'a' to add a movie, 'l' to see your movies, 'f' to find a movie by the title, or 'q' to quit: ").lower()
     while selection != 'q':
         if selection == "a":
@@ -65,5 +85,6 @@ def menu():
         else:
             print("Unknown command. Please try again")
         selection = input("\nEnter 'a' to add a movie, 'l' to see your movies, 'f' to find a movie by the title, or 'q' to quit: ")
+        save_movies()
 
 menu()
