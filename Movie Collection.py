@@ -66,7 +66,7 @@ def add_upcoming_movie():
     """
     Adds a new upcoming movie to the movies list.
 
-    This function prompts the user for the upcoming movie's title, director, and release date.
+    This function prompts the user for the upcoming movie's title, director.
     It then adds the movie to the movies list with a flag indicating that it's an upcoming release.
 
     @return None
