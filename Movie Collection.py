@@ -73,14 +73,12 @@ def add_upcoming_movie():
     """
     title = input("Enter the upcoming movie title: ")
     director = input("Enter the movie director: ")
-    release_date = input("Enter the movie release date (e.g., 2023-12-25): ")
 
     movies.append(
         {
             "title": title,
             "director": director,
-            "year": "Upcoming",
-            "release_date": release_date
+            "year": "Upcoming"
         }
     )
     print(f"'{title}' added successfully as an upcoming movie!")
